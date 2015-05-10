@@ -47,7 +47,7 @@ public class ParserStateTransition {
         }
     }
 
-    public boolean recognizes(String txt) {
+    public boolean matches(String txt) {
         boolean[] visited = objGraph.performDepthFirst(0);
         List<Integer> pc = new List<>();
         for (int v = 0; v < objGraph.vertices(); v++)
@@ -115,11 +115,11 @@ public class ParserStateTransition {
         long l1 = System.currentTimeMillis();
         ParserStateTransition nfa = new ParserStateTransition(regexp);
 
-        if(nfa.recognizes(txt)){
+        if(nfa.matches(txt)){
             System.out.println("with new code -- " + nfa.m[3] + "-- " + nfa.m[8]);
         }
 
-        System.out.println(nfa.recognizes(txt));
+        System.out.println(nfa.matches(txt));
 
         long l2 = System.currentTimeMillis();
 
