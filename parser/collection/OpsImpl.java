@@ -8,7 +8,7 @@ public class OpsImpl {
     interface Action{
         //Object[] left();
         Action right();
-        Object result(Object o);
+        Object invoke(Object o);
     }
     static class Idempotent implements Action{
         String field;
@@ -23,7 +23,7 @@ public class OpsImpl {
         }
 
         @Override
-        public Object result(Object o) {
+        public Object invoke(Object o) {
             return field;
         }
     }
@@ -49,7 +49,7 @@ public class OpsImpl {
         }
 
         @Override
-        public Object result(Object o) {
+        public Object invoke(Object o) {
             try {
                 String[] s = (String[]) m.invoke(o, obj[0]);
                 return s[((int) obj[1])];
@@ -87,7 +87,7 @@ public class OpsImpl {
             return right;
         }
 
-        public Object result(Object o){
+        public Object invoke(Object o){
             try {
                 return m.invoke(obj[0], o);
             } catch (IllegalAccessException e) {
@@ -105,7 +105,7 @@ public class OpsImpl {
             return "";
 
         }
-        return root.result(traverse(root.right())).toString();
+        return root.invoke(traverse(root.right())).toString();
 
     }
 
