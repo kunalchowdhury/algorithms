@@ -1,0 +1,5 @@
+1. The order book shouldnt contain FAK/FOK orders but it can contain limit orders
+2. The aggressive queue shouldnt contain any unmatched orders neither FAK/FOK or Limit orders. All matching should be done from the book
+3. The aggressive queue should be an indexed based array or list sorted by order timestamp . Also we should maintain a map of matched order ids in the book which are sent to ECN versus index in the array .
+Since these are async calls to the ECN, once successful replies come back the corresponding entry in the array should be deleted.  
+Whenever an element is added we should iterate through this array and scan for the opposite matching direction in the book at the given price.
